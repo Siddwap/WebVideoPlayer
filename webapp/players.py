@@ -30,7 +30,7 @@ def play_hls(url, title="HLS", track_url=""):
     )
 
 
-def play_brightcove(video_id, account_id=ACCOUNT_ID, bcov_policy=BCOV_POLICY, fmt=3, url_args=""):
+def play_brightcove(video_id, account_id=ACCOUNT_ID, bcov_policy=BCOV_POLICY, fmt=3, url_args="bcov_auth=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhY2NpZCI6IjYyMDY0NTkxMjMwMDEiLCJleHAiOjE2MzU2ODY3NDMsImlhdCI6MTYzNTY4MTk0MywiY29uaWQiOiI2Mjc4MzAwMDAxMDAxIiwibWF4aXAiOjF9.MOcr31iKUCmg4fHCgP_j6trU1sbFqKvd2FzWD1VYxw-geQcrQxETV3IidWkcXMm_YsYOZ7z161wRH5DAY9xArIR2n5SIoBYsBnWWWMOn9MEsmSEQ0wHU3izMuzS9GPt1JThMKPclWlxL4NkiL8h-pocN8kzQeFGxMnpRsOAXutgZv9jQq8lDifJH5mgsDRCVsfwHtKea0IjxNBSUHXa8cyDfVN8ojQLeYQbQAnuoW-KAIVpVj5iC_qiY5dDVwwU-jDef95JZuq5Dcndq5DT_Psdz7IoQdMSF3rnh_6mn1adF0EDSYhjPbtr1W7jxupUx5yRKkoSTwDpyif5mlZWHJQ"):
     bc_url = BC_URL.format(account_id, video_id)
     bc_hdr = {"BCOV-POLICY": bcov_policy}
     video_response = requests.get(bc_url, headers=bc_hdr)
@@ -52,7 +52,7 @@ def play_brightcove(video_id, account_id=ACCOUNT_ID, bcov_policy=BCOV_POLICY, fm
             "license_url"
         ]
     track_url = video["text_tracks"][1]["src"]
-    if url_args != "":
+    if url_args != "bcov_auth=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhY2NpZCI6IjYyMDY0NTkxMjMwMDEiLCJleHAiOjE2MzU2ODY3NDMsImlhdCI6MTYzNTY4MTk0MywiY29uaWQiOiI2Mjc4MzAwMDAxMDAxIiwibWF4aXAiOjF9.MOcr31iKUCmg4fHCgP_j6trU1sbFqKvd2FzWD1VYxw-geQcrQxETV3IidWkcXMm_YsYOZ7z161wRH5DAY9xArIR2n5SIoBYsBnWWWMOn9MEsmSEQ0wHU3izMuzS9GPt1JThMKPclWlxL4NkiL8h-pocN8kzQeFGxMnpRsOAXutgZv9jQq8lDifJH5mgsDRCVsfwHtKea0IjxNBSUHXa8cyDfVN8ojQLeYQbQAnuoW-KAIVpVj5iC_qiY5dDVwwU-jDef95JZuq5Dcndq5DT_Psdz7IoQdMSF3rnh_6mn1adF0EDSYhjPbtr1W7jxupUx5yRKkoSTwDpyif5mlZWHJQ":
         video_url += "?" + url_args
     return play_dash(video_url, video_name, track_url, widevine_url, microsoft_url)
 
